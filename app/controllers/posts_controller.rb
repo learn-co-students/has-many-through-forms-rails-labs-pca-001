@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
+    @comment = @post.comments.build
+    @comment.build_user
   end
 
   def index
@@ -16,7 +18,7 @@ class PostsController < ApplicationController
     redirect_to post
   end
 
-  private
+private
 
   def post_params
     params.require(:post).permit(:title, :content, category_ids:[], categories_attributes: [:name])
